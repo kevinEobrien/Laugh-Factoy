@@ -1,24 +1,20 @@
 <template>
   <div>
     <ul>
-      <li v-for="laugh in laughs" :key='laugh'>
-        <h3>{{laugh.name}}</h3>
-        <p>{{laugh.description}}</p>
-        <audio :src='laugh.laughlink' controls>BAM</audio>
-      </li>
+      <LaughCard v-for='laugh in laughs' :key='laugh' :laugh='laugh' :apiURL='apiURL' :reload='reload'/>
     </ul>
-    <!-- <SampleLaugh/> -->
   </div>
 </template>
 <script>
-import SampleLaugh from '@/components/SampleLaugh';
+
+import LaughCard from '@/components/LaughCard';
 
 export default {
   name: 'LaughList',
   components: {
-    SampleLaugh
+    LaughCard
   },
-  props: ['laughs'],
+  props: ['laughs', 'apiURL', 'reload'],
   mounted() {
     console.log('on List page', this.laughs) 
   }

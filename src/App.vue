@@ -1,18 +1,19 @@
 <template>
   <div id='app'>
    <h1>Welcome to the Laugh Factory</h1>
-   <LaughList :laughs='laughs'/>
+   <SubmitLaugh :getListings='getListings' :laughs='laughs' :apiURL='apiURL'/>
+   <LaughList :reload='getListings' :apiURL='apiURL' :laughs='laughs'/>
   </div>
 </template>
 /* eslint-disable */  
 <script>
-import SampleLaugh from '@/components/SampleLaugh'
 import LaughList from '@/components/LaughList'
+import SubmitLaugh from '@/components/SubmitLaugh'
 
 export default {
   name: 'App',
   components: {
-    SampleLaugh, LaughList
+    LaughList, SubmitLaugh
   },
   data() {
     return {
@@ -26,7 +27,6 @@ export default {
         .then(response => response.json())
         .then(response => {
           this.laughs = response.laughs
-          console.log(this.laughs)
         })
     }
   },

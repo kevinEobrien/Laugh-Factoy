@@ -10,7 +10,7 @@ export default new Router({
     {
       path: '@/components/LaughList',
       name: 'LaughList',
-      component: LaughList,
+      component: LaughList
     },
   ],
 });
