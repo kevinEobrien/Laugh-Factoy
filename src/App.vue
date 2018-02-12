@@ -1,8 +1,7 @@
 <template>
   <div id='app'>
    <h1>Welcome to the Laugh Factory</h1>
-   <LaughList/>
-  <SampleLaugh/>
+   <LaughList :laughs='laughs'/>
   </div>
 </template>
 /* eslint-disable */  
@@ -12,21 +11,36 @@ import LaughList from '@/components/LaughList'
 
 export default {
   name: 'App',
-  components:{
+  components: {
     SampleLaugh, LaughList
   },
-  data(){
-    return{
-      apiURL: '',
+  data() {
+    return {
+      apiURL: 'https://calm-plains-98236.herokuapp.com/',
       laughs: []
     }
   },
-    methods:{}
+  methods: {
+    getListings() {
+      fetch(this.apiURL)
+        .then(response => response.json())
+        .then(response => {
+          this.laughs = response.laughs
+          console.log(this.laughs)
+        })
+    }
+  },
+  mounted() {
+    this.getListings();
+  }
 };
 </script>
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display');
+*{
+  margin: 0;
+}
 #app {
   font-family: 'Sedgwick Ave Display';
   font-size: 5rem;
@@ -38,6 +52,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  margin: 0;
 }
 h1{
   color: indianred;
