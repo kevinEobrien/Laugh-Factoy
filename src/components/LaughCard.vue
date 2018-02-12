@@ -12,36 +12,25 @@
 <script>
 export default {
   name: 'LaughCard',
-  props: ['laugh', 'apiURL','getListings'],
-  data(){
-      return{
-          submission:{
-              likes: Num
-          }
+  props: ['laugh', 'apiURL', 'getListings'],
+  data() {
+    return {
+      submission: {
+        likes: 0
       }
+    }
   },
   methods: {
     deletelaugh() {
       fetch(this.apiURL + this.laugh.id, {
         method: 'DELETE'
       })
-        .then(console.log('It works....Sorta...'+ this.apiURL + this.laugh.id))
+        .then(console.log('It works....Sorta...', this.apiURL + this.laugh.id))
         .then(() => this.getListings())
     },
-    likeIt (){
-        fetch(this.apiURL, {
-          method: 'POST',
-          headers: new Headers({ 'Content-Type': 'application/json' }),
-          body: JSON.stringify(this.submission)
-        })
-          .then(response => response.json())
-          .then(json => {
-            this.getListings()
-        })
+    likeIt() {
+      this.laugh.likes++
     }
-    // refresh () {
-    //    this.reload()
-    // }
   }
 }
 </script>

@@ -30,18 +30,18 @@ export default{
     submitLaugh() {
     //   if (event.target['nameinput'].value.length > 0 && event.target['descriptioninput'].value.length > 0 && event.target['link'].value.length > 0
     //   ) {
-        fetch(this.apiURL, {
-          method: 'POST',
-          headers: new Headers({ 'Content-Type': 'application/json' }),
-          body: JSON.stringify(this.submission)
+      fetch(this.apiURL, {
+        method: 'POST',
+        headers: new Headers({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify(this.submission)
+      })
+        .then(response => response.json())
+        .then(() => {
+          this.getListings()
         })
-          .then(response => response.json())
-          .then(json => {
-            this.getListings()
-        })
-    //   } else {
-    //     console.log('Please complete all fields before submitting.')
-    //   }
+      //   } else {
+      //     console.log('Please complete all fields before       submitting.')
+      //   }
       this.submission.name = ''
       this.submission.description = ''
       this.submission.laughlink = ''
