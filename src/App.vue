@@ -2,7 +2,7 @@
   <div id='app'>
    <h1>Welcome to the Laugh Factory</h1>
    <SubmitLaugh :getListings='getListings' :laughs='laughs' :apiURL='apiURL'/>
-   <LaughList :reload='getListings' :apiURL='apiURL' :laughs='laughs'/>
+   <LaughList :getListings='getListings' :apiURL='apiURL' :laughs='laughs'/>
   </div>
 </template>
 /* eslint-disable */  
@@ -53,6 +53,7 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
   margin: 0;
+  color: indianred;
 }
 h1{
   color: indianred;

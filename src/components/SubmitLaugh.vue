@@ -36,7 +36,7 @@ export default{
           body: JSON.stringify(this.submission)
         })
           .then(response => response.json())
-          .then(() => {
+          .then(json => {
             this.getListings()
         })
     //   } else {

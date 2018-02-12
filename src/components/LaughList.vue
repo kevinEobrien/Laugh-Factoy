@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <LaughCard v-for='laugh in laughs' :key='laugh' :laugh='laugh' :apiURL='apiURL' :reload='reload'/>
+      <LaughCard v-for='laugh in laughs' :key='laugh' :laugh='laugh' :apiURL='apiURL' :getListings='getListings'/>
     </ul>
   </div>
 </template>
@@ -14,7 +14,7 @@ export default {
   components: {
     LaughCard
   },
-  props: ['laughs', 'apiURL', 'reload'],
+  props: ['laughs', 'apiURL', 'getListings'],
   mounted() {
     console.log('on List page', this.laughs) 
   }
