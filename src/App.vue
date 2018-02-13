@@ -46,8 +46,8 @@ export default {
   font-size: 5rem;
   -webkit-font-smoothing: antialiased;
   background-image: url('../static/hahahaha.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-repeat: repeat;
+  background-size: 120vw;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;

@@ -29,6 +29,15 @@ export default {
         .then(() => this.getListings())
     },
     likeIt() {
+        fetch(this.apiURL, {
+            method: 'UPDATE',
+            headers: new Headers({ 'Content-Type': 'application/json' }),
+            body: JSON.stringify(this.likes)
+        })
+        .then(response => response.json())
+        .then(() => {
+          this.getListings()
+        })
       this.laugh.likes++
     }
   }
