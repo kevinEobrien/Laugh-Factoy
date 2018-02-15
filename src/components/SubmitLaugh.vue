@@ -50,3 +50,16 @@ export default{
   }
 }
 </script>
+<style scoped>
+div{
+    margin: 3rem 5rem 1rem 5rem;
+    border: 4px;
+    background-color: white;
+    border-radius: 20px;
+}
+label{
+    font-size: 2rem;
+    font-family:Arial, Helvetica, sans-serif;
+}
+</style>
+

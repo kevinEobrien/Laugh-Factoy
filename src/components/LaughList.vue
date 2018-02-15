@@ -24,21 +24,24 @@ export default {
 ul{
   list-style: none;
   display: flex;
-  flex-flow: column;
-  align-items: center;
+  flex-flow: row;
+  flex-wrap: wrap;
+  justify-content: center;
   font-size: 2rem;
 }
 li{
   font-family: 'Lucida Sans', sans-serif;
   margin: 5px;
   width: 25vw;
+  height:30vh;
   border-radius: 20px;
   color: indianred;
   background-color: white;
   border: solid 2px black;
+  margin: 1rem;
 }
 li h3{
-  margin: 0;
+  padding: 1rem 0rem 0rem 0rem;
 }
 li p{
   margin: 0;
