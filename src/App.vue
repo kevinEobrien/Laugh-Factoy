@@ -1,46 +1,49 @@
 <template>
   <div id='app'>
    <h1>Welcome to the Laugh Factory</h1>
-   <SubmitLaugh :getListings='getListings' :laughs='laughs' :apiURL='apiURL'/>
-   <LaughList :getListings='getListings' :apiURL='apiURL' :laughs='laughs'/>
-   <Comments :commentsURL='commentsURL' :comments='comments'/>
-   <AddComment/>
+   <SubmitLaugh :getListings="getListings" :laughs='laughs' :apiURL="apiURL"/>
+   <LaughList :getListings="getListings" :apiURL="apiURL" :laughs="laughs"/>
+   <Comments :commentsURL="commentsURL" :comments="comments"/>
+   <AddComment :commentsURL="commentsURL" :getComments="getComments" :comments="comments"/>
   </div>
 </template>
 /* eslint-disable */  
 <script>
-import LaughList from '@/components/LaughList'
-import SubmitLaugh from '@/components/SubmitLaugh'
-import AddComment from '@/components/AddComment'
-import Comments from '@/components/Comments'
+import LaughList from "@/components/LaughList";
+import SubmitLaugh from "@/components/SubmitLaugh";
+import AddComment from "@/components/AddComment";
+import Comments from "@/components/Comments";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    LaughList, SubmitLaugh, AddComment, Comments
+    LaughList,
+    SubmitLaugh,
+    AddComment,
+    Comments
   },
   data() {
     return {
-      apiURL: 'https://calm-plains-98236.herokuapp.com/',
+      apiURL: "https://calm-plains-98236.herokuapp.com/",
       laughs: [],
-      commentsURL: 'https://calm-plains-98236.herokuapp.com/comments',
+      commentsURL: "https://calm-plains-98236.herokuapp.com/comments",
       comments: []
-    }
+    };
   },
   methods: {
     getListings() {
       fetch(this.apiURL)
         .then(response => response.json())
         .then(response => {
-          this.laughs = response.laughs
-        })
+          this.laughs = response.laughs;
+        });
     },
     getComments() {
       fetch(this.commentsURL)
         .then(response => response.json())
         .then(response => {
-          this.comments = response.comments
-        })
+          this.comments = response.comments;
+        });
     }
   },
   mounted() {
@@ -51,15 +54,15 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display');
-*{
+@import url("https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display");
+* {
   margin: 0;
 }
 #app {
-  font-family: 'Sedgwick Ave Display';
+  font-family: "Sedgwick Ave Display";
   font-size: 5rem;
   -webkit-font-smoothing: antialiased;
-  background-image: url('../static/HAHA.png');
+  background-image: url("../static/HAHA.png");
   background-repeat: repeat;
   background-size: initial;
   -moz-osx-font-smoothing: grayscale;
@@ -69,7 +72,7 @@ export default {
   margin: 0;
   color: indianred;
 }
-h1{
+h1 {
   color: indianred;
   text-shadow: 2px 2px black;
 }

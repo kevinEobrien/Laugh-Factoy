@@ -13,53 +13,53 @@
   </div>
 </template>
 <script>
-export default{
-  name: 'SubmitLaugh',
-  props: ['apiURL', 'laughs', 'getListings'],
+export default {
+  name: "SubmitLaugh",
+  props: ["apiURL", "laughs", "getListings"],
   data() {
     return {
       submission: {
-        name: '',
-        description: '',
-        laughlink: '',
+        name: "",
+        description: "",
+        laughlink: "",
         likes: 0
       }
-    }
+    };
   },
   methods: {
     submitLaugh() {
-    //   if (event.target['nameinput'].value.length > 0 && event.target['descriptioninput'].value.length > 0 && event.target['link'].value.length > 0
-    //   ) {
+      //   if (event.target['nameinput'].value.length > 0 && event.target['descriptioninput'].value.length > 0 && event.target['link'].value.length > 0
+      //   ) {
       fetch(this.apiURL, {
-        method: 'POST',
-        headers: new Headers({ 'Content-Type': 'application/json' }),
+        method: "POST",
+        headers: new Headers({ "Content-Type": "application/json" }),
         body: JSON.stringify(this.submission)
       })
         .then(response => response.json())
         .then(() => {
-          this.getListings()
-        })
+          this.getListings();
+        });
       //   } else {
       //     console.log('Please complete all fields before       submitting.')
       //   }
-      this.submission.name = ''
-      this.submission.description = ''
-      this.submission.laughlink = ''
-      this.submission.likes = 0
+      this.submission.name = "";
+      this.submission.description = "";
+      this.submission.laughlink = "";
+      this.submission.likes = 0;
     }
   }
-}
+};
 </script>
 <style scoped>
-div{
-    margin: 3rem 5rem 1rem 5rem;
-    border: 4px;
-    background-color: white;
-    border-radius: 20px;
+div {
+  margin: 3rem 5rem 1rem 5rem;
+  border: 4px;
+  background-color: white;
+  border-radius: 20px;
 }
-label{
-    font-size: 2rem;
-    font-family:Arial, Helvetica, sans-serif;
+label {
+  font-size: 2rem;
+  font-family: Arial, Helvetica, sans-serif;
 }
 </style>
 
