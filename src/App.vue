@@ -3,6 +3,7 @@
    <h1>Welcome to the Laugh Factory</h1>
    <SubmitLaugh :getListings="getListings" :laughs='laughs' :apiURL="apiURL"/>
    <LaughList :getListings="getListings" :apiURL="apiURL" :laughs="laughs"/>
+   <LikeChart :laughs="laughs"/>
    <Comments :commentsURL="commentsURL" :comments="comments"/>
    <AddComment :commentsURL="commentsURL" :getComments="getComments" :comments="comments"/>
   </div>
@@ -13,6 +14,7 @@ import LaughList from "@/components/LaughList";
 import SubmitLaugh from "@/components/SubmitLaugh";
 import AddComment from "@/components/AddComment";
 import Comments from "@/components/Comments";
+import LikeChart from "@/components/LikeChart";
 
 export default {
   name: "App",
@@ -20,7 +22,8 @@ export default {
     LaughList,
     SubmitLaugh,
     AddComment,
-    Comments
+    Comments,
+    LikeChart
   },
   data() {
     return {
@@ -35,7 +38,7 @@ export default {
       fetch(this.apiURL)
         .then(response => response.json())
         .then(response => {
-          this.laughs = response.laughs;
+          this.laughs = response.laughs.sort();
         });
     },
     getComments() {
@@ -49,6 +52,7 @@ export default {
   mounted() {
     this.getListings();
     this.getComments();
+    console.log("vue page", this.laughs);
   }
 };
 </script>

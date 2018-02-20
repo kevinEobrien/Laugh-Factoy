@@ -16,6 +16,9 @@ export default {
   props: ["laughs", "apiURL", "getListings"],
   mounted() {
     console.log("on List page", this.laughs);
+  },
+  methods: {
+    sortIt() {}
   }
 };
 </script>

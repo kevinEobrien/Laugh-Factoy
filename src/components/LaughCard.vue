@@ -29,12 +29,14 @@ export default {
         .then(() => this.getListings());
     },
     likeIt() {
-      fetch(this.apiURL, {
+      console.log(this.apiURL + this.laugh.id);
+      fetch(this.apiURL + this.laugh.id, {
         method: "put",
-        headers: new Headers({ "Content-Type": "application/json" }),
-        body: JSON.stringify(this.likes)
+        headers: new Headers({ "Content-Type": "application/json" }),   
+        body: JSON.stringify(this.submission)
       })
-        .then(() => console.log("updated!!! "));
+        .then(() => console.log("updated!!! "))
+        .then(() => this.getListings());
     }
     // checkStatus(response) {
     //   if (response.status >= 200 && response.status < 300) {
