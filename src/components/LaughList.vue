@@ -35,7 +35,7 @@ li {
   font-family: "Lucida Sans", sans-serif;
   margin: 5px;
   width: 25vw;
-  height: 30vh;
+  height: 40vh;
   border-radius: 20px;
   color: indianred;
   background-color: white;
