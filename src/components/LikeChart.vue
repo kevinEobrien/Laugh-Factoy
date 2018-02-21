@@ -15,14 +15,15 @@ import BarChart from "@/components/BarChart";
 
 export default {
   name: "LikeChart",
-  props: ["laughs", "getListings"],
+  props: ["laughs", "getListings", "sortByLikes"],
   components: {
     BarChart
   },
   data() {
     return {
       names: [],
-      chartLikes: []
+      chartLikes: [],
+      topNames: []
     };
   },
   methods: {
@@ -32,6 +33,11 @@ export default {
           this.names.push(this.laughs[i].name);
         }
       });
+      // sortByLikes(names);
+      // console.log("sorted names?", names);
+    },
+    getTops() {
+      topNames.push(names);
     },
     makeLikes() {
       this.getListings().then(() => {
@@ -45,6 +51,8 @@ export default {
     // this.getListings();
     this.makeNames();
     this.makeLikes();
+    // this.getTops();
+    console.log("Are there top names here?", topNames);
   },
   computed: {}
 };

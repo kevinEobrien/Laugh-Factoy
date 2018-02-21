@@ -42,7 +42,7 @@ export default {
         });
     },
     sortByLikes(completeArray) {
-      completeArray.sort(function(a, b) {
+      completeArray.sort((a, b) => {
         return a.likes - b.likes;
       });
     },
