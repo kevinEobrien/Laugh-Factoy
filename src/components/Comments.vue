@@ -1,10 +1,10 @@
 <template>
   <div class="comments">
-      <ul v-for="comment in comments" :key="comment">
+      <ul v-for="commentItem in comments" :key="commentItem.comment">
         <li>
-            <p>Commentor's name: {{comment.Commenter}}</p>
-            <p>Topic: {{comment.topic}}</p>
-            <p>Comment: {{comment.comment}}</p>
+            <p>Commentor's name: {{commentItem.Commenter}}</p>
+            <p>Topic: {{commentItem.topic}}</p>
+            <p>Comment: {{commentItem.comment}}</p>
         </li>
       </ul>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="submit-card">
       <h2>Submit a laugh</h2>
     <form id="form-input" v-on:submit.prevent="submitLaugh">
       <label for="name">Name</label>
@@ -51,6 +51,10 @@ export default {
 };
 </script>
 <style scoped>
+.submit-card {
+  background-color: white;
+  border-radius: 20px;
+}
 div {
   margin: 3rem 5rem 1rem 5rem;
   border: 4px;

@@ -3,8 +3,8 @@
     <div class="container">
       <div class="Chart__list">
         <div class="Chart">
-          <h2>It's a Goddam, Motherfucking Chart</h2>
-          <BarChart :names="names"/>
+          <h2>Most Liked Laughs</h2>
+          <BarChart :names="names" :chartLikes="chartLikes" :getListings="getListings"/>
         </div>
       </div>
     </div>
@@ -15,27 +15,36 @@ import BarChart from "@/components/BarChart";
 
 export default {
   name: "LikeChart",
-  props: ["laughs"],
+  props: ["laughs", "getListings"],
   components: {
     BarChart
   },
   data() {
     return {
       names: [],
-      chartdata: []
+      chartLikes: []
     };
   },
   methods: {
     makeNames() {
-      for (let i = 0; i < this.laughs.length; i++) {
-        this.names.push(this.laughs[i].name);
-      }
-      console.log("Hoody fucking doo", this.names);
+      this.getListings().then(() => {
+        for (let i = 0; i < this.laughs.length; i++) {
+          this.names.push(this.laughs[i].name);
+        }
+      });
+    },
+    makeLikes() {
+      this.getListings().then(() => {
+        for (let i = 0; i < this.laughs.length; i++) {
+          this.chartLikes.push(this.laughs[i].likes);
+        }
+      });
     }
   },
   mounted() {
-    console.log("Does it work?", this.laughs);
+    // this.getListings();
     this.makeNames();
+    this.makeLikes();
   },
   computed: {}
 };
