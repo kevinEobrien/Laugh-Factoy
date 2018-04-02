@@ -2,10 +2,11 @@
   <div id='app'>
    <h1>Welcome to the Laugh Factory</h1>
    <SubmitLaugh :getListings="getListings" :laughs='laughs' :apiURL="apiURL"/>
+   <AddComment :commentsURL="commentsURL" :getComments="getComments" :comments="comments"/>
    <LaughList :getListings="getListings" :apiURL="apiURL" :laughs="laughs"/>
    <LikeChart :sortByLikes="sortByLikes" :laughs="laughs" :getListings="getListings"/>
    <Comments :commentsURL="commentsURL" :comments="comments"/>
-   <AddComment :commentsURL="commentsURL" :getComments="getComments" :comments="comments"/>
+ 
   </div>
 </template>
 /* eslint-disable */  
@@ -81,7 +82,7 @@ export default {
   color: indianred;
 }
 h1 {
-  color: indianred;
+  color: whitesmoke;
   text-shadow: 2px 2px black;
 }
 </style>

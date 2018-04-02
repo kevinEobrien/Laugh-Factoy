@@ -30,11 +30,9 @@ export default {
           const sortedNames = array.sort((a, b) => a.likes - b.likes);
           const nums = this.chartLikes
           const sortedLikes = nums.sort((a, b) => a.likes - b.likes);
-          console.log("types are", sortedNames, typeof nums)
           const labelsArray = Object.values(sortedNames)
           const topTen = labelsArray.slice(0, 11)
           const numArray = Object.values(sortedLikes)
-          console.log("labelsArray is", labelsArray, numArray)
           this.renderChart({
             labels: topTen,
             scales: {
@@ -51,7 +49,6 @@ export default {
                 }
               }]
             },
-          
             datasets: [
               {
                 label: 'Likes',
@@ -68,17 +65,5 @@ export default {
       .then(() => {
         this.renderIt()
       })
-      
-  //     this.renderChart({
-  //       labels: [...this.names],
-  //       datasets: [
-  //         {
-  //           label: 'Likes',
-  //           backgroundColor: 'indianred',
-  //           data: [...this.chartLikes, 0]
-  //         }
-  //       ]
-  //     }, { responsive: true, maintainAspectRatio: false })
-  //   }
   }
 }

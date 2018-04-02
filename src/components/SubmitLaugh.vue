@@ -28,8 +28,6 @@ export default {
   },
   methods: {
     submitLaugh() {
-      //   if (event.target['nameinput'].value.length > 0 && event.target['descriptioninput'].value.length > 0 && event.target['link'].value.length > 0
-      //   ) {
       fetch(this.apiURL, {
         method: "POST",
         headers: new Headers({ "Content-Type": "application/json" }),
@@ -39,9 +37,6 @@ export default {
         .then(() => {
           this.getListings();
         });
-      //   } else {
-      //     console.log('Please complete all fields before       submitting.')
-      //   }
       this.submission.name = "";
       this.submission.description = "";
       this.submission.laughlink = "";

@@ -33,8 +33,6 @@ export default {
           this.names.push(this.laughs[i].name);
         }
       });
-      // sortByLikes(names);
-      // console.log("sorted names?", names);
     },
     getTops() {
       topNames.push(names);
@@ -48,11 +46,8 @@ export default {
     }
   },
   mounted() {
-    // this.getListings();
     this.makeNames();
     this.makeLikes();
-    // this.getTops();
-    console.log("Are there top names here?", topNames);
   },
   computed: {}
 };
