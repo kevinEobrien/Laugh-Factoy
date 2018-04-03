@@ -1,6 +1,9 @@
-# tower
+# The Laugh Factory
 
-> A Vue.js project
+This feel-good app is all about sharing laughter.  Post your laugh, comment, look at laugh popularity, or just sit back and laugh yourself while you listen to laughs others have contributed.
+
+![]( https://s3.amazonaws.com/the-laugh-factory/laughFactoryScreenShot.png)
+
 
 ## Build Setup
 
