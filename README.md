@@ -22,3 +22,15 @@ npm run build --report
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+
+## License
+MIT License
+
+Copyright (c) 2018 Kevin E. O'Brien
+
+## Contact
+
+|<img src="https://avatars3.githubusercontent.com/u/31964386?s=400&v=4" width="100"> | Kevin O'Brien                    |
+| ------------- | ------------- |
+| LinkedIn   | [/in/kevin-e-obrien/](https://www.linkedin.com/in/kevin-e-obrien/) |
