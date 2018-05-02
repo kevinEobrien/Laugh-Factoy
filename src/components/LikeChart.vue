@@ -22,8 +22,7 @@ export default {
   data() {
     return {
       names: [],
-      chartLikes: [],
-      topNames: []
+      chartLikes: []
     };
   },
   methods: {
@@ -33,9 +32,6 @@ export default {
           this.names.push(this.laughs[i].name);
         }
       });
-    },
-    getTops() {
-      topNames.push(names);
     },
     makeLikes() {
       this.getListings().then(() => {

@@ -59,6 +59,7 @@ div {
 label {
   font-size: 2rem;
   font-family: Arial, Helvetica, sans-serif;
+  text-shadow: 2px 2px black;
 }
 </style>
 

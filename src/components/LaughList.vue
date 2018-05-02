@@ -17,8 +17,17 @@ export default {
   mounted() {
     this.getListings();
   },
+  data() {
+    apiURL: "https://calm-plains-98236.herokuapp.com/";
+  },
   methods: {
-    sortIt() {}
+    getListings() {
+      return fetch(this.apiURL)
+        .then(response => response.json())
+        .then(response => {
+          this.laughs = response.laughs.sort();
+        });
+    }
   }
 };
 </script>
