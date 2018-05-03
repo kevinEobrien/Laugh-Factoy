@@ -1,15 +1,15 @@
 <template>
     <div>
-  	    <nav>
+        <nav>
             <ul>
                 <li>
-			        <router-link class="nav-item" to="/laughlist">Laugh List</router-link>
+			        <router-link class="nav-item" to="/laughlist">See All Laughs</router-link>
+                </li>
+                <li>
+			        <router-link class="nav-item" to="/toplaughs">Top Laughs</router-link>
                 </li>
                 <li>
                     <router-link class="nav-item" to="/submitlaugh">Submit a Laugh</router-link>
-                </li>
-                <li>
-                    <router-link class="nav-item" to="/addcomment">Add a Comment</router-link>
                 </li>
                  <li>
                     <router-link class="nav-item" to="/comments">View Comments</router-link>

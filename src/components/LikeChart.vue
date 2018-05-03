@@ -4,7 +4,7 @@
       <div class="Chart__list">
         <div class="Chart">
           <h2>Most Liked Laughs</h2>
-          <BarChart :names="names" :chartLikes="chartLikes" :getListings="getListings"/>
+          <BarChart :names="names" :chartLikes="chartLikes" />
         </div>
       </div>
     </div>
@@ -15,7 +15,7 @@ import BarChart from "@/components/BarChart";
 
 export default {
   name: "LikeChart",
-  props: ["laughs", "getListings", "sortByLikes"],
+  props: ["topTen"],
   components: {
     BarChart
   },
@@ -27,18 +27,15 @@ export default {
   },
   methods: {
     makeNames() {
-      this.getListings().then(() => {
-        for (let i = 0; i < this.laughs.length; i++) {
-          this.names.push(this.laughs[i].name);
-        }
-      });
+      console.log("topTen is now ", this.topTen);
+      for (let i = 0; i < this.topTen.length; i++) {
+        this.names.push(this.topTen[i].name);
+      }
     },
     makeLikes() {
-      this.getListings().then(() => {
-        for (let i = 0; i < this.laughs.length; i++) {
-          this.chartLikes.push(this.laughs[i].likes);
-        }
-      });
+      for (let i = 0; i < this.topTen.length; i++) {
+        this.chartLikes.push(this.topTen[i].likes);
+      }
     }
   },
   mounted() {
