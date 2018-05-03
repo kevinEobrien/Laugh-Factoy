@@ -7,13 +7,34 @@
             <p>Comment: {{commentItem.comment}}</p>
         </li>
       </ul>
+      <AddComment :getComments="getComments"/>
   </div>
 </template>
 
 <script>
+import AddComment from "@/components/AddComment";
+
 export default {
   name: "Comments",
-  props: ["commentsURL", "comments"]
+  components: { AddComment },
+  data() {
+    return {
+      commentsURL: "https://calm-plains-98236.herokuapp.com/comments",
+      comments: []
+    };
+  },
+  methods: {
+    getComments() {
+      return fetch(this.commentsURL)
+        .then(response => response.json())
+        .then(response => {
+          this.comments = response.comments;
+        });
+    }
+  },
+  mounted() {
+    this.getComments();
+  }
 };
 </script>
 
@@ -22,11 +43,16 @@ export default {
   border: black 4px;
   background-color: white;
   border-radius: 20px;
+  margin: 1rem;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
 }
 p {
   border: 0rem;
   margin: 0rem;
   padding: 0rem;
+  font-size: 2rem;
 }
 ul {
   list-style: none;

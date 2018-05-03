@@ -33,9 +33,7 @@ export default {
   data() {
     return {
       apiURL: "https://calm-plains-98236.herokuapp.com/",
-      laughs: [],
-      commentsURL: "https://calm-plains-98236.herokuapp.com/comments",
-      comments: []
+      laughs: []
     };
   },
   methods: {
@@ -45,18 +43,10 @@ export default {
         .then(response => {
           this.laughs = response.laughs.sort();
         });
-    },
-    getComments() {
-      return fetch(this.commentsURL)
-        .then(response => response.json())
-        .then(response => {
-          this.comments = response.comments;
-        });
     }
   },
   mounted() {
     this.getListings();
-    this.getComments();
   }
 };
 </script>
@@ -82,7 +72,8 @@ export default {
   margin: 0;
   color: indianred;
   text-shadow: 2px 2px black;
-  height: 100vh;
+  height: fit-content;
+  min-height: 100vh;
 }
 h1 {
   color: whitesmoke;

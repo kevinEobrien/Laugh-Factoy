@@ -32,7 +32,10 @@ module.exports = {
     'no-console': 0,
     'max-len': 0,
     'no-plusplus': 0,
-    'quotes': 0, 
+    'quotes': 0,
+    'no-tabs': 0,
+    'prefer-const': 0,
+    'no-mixed-spaces-and-tabs': 0, 
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {
       js: 'never',
