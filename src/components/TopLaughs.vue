@@ -1,25 +1,28 @@
 <template>
   <div>
-    <ul>
-      <LaughCard v-for="laugh in laughs" :key="laugh" :laugh="laugh" :apiURL="apiURL" :getListings="getListings"/>
-    </ul>
+      <ul>
+        <LaughCard v-for="laugh in topTen" :key="laugh" :laugh="laugh" :apiURL="apiURL"/>
+      </ul>
+      <LikeChart :topTen="topTen"/>
+      <button @click.prevent="getTopTen">TEST</button>
   </div>
 </template>
+
 <script>
+import LikeChart from "@/components/LikeChart";
 import LaughCard from "@/components/LaughCard";
 
 export default {
-  name: "LaughList",
-  components: {
-    LaughCard
-  },
+  name: "TopLaughs",
+  components: { LikeChart, LaughCard },
   mounted() {
     this.getListings();
   },
   data() {
     return {
       apiURL: "https://calm-plains-98236.herokuapp.com/",
-      laughs: ""
+      laughs: [],
+      topTen: []
     };
   },
   methods: {
@@ -29,6 +32,11 @@ export default {
         .then(response => {
           this.laughs = response.laughs;
         });
+    },
+    getTopTen() {
+      for (let i = 0; i < 9; i++) {
+        this.topTen.push(this.laughs[i]);
+      }
     }
   }
 };
