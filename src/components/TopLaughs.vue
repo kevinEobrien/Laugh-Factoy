@@ -1,10 +1,9 @@
 <template>
   <div>
       <ul>
-        <LaughCard v-for="laugh in topTen" :key="laugh" :laugh="laugh" :apiURL="apiURL"/>
+        <LaughCard v-for="laugh in topTen" :key="laugh.id" :laugh="laugh" :apiURL="apiURL" :topTen="topTen"/>
       </ul>
-      <LikeChart :topTen="topTen"/>
-      <button @click.prevent="getTopTen">TEST</button>
+      <!-- <LikeChart :topTen="topTen"/> -->
   </div>
 </template>
 
@@ -17,6 +16,7 @@ export default {
   components: { LikeChart, LaughCard },
   mounted() {
     this.getListings();
+    this.getTopTen();
   },
   data() {
     return {
@@ -34,9 +34,13 @@ export default {
         });
     },
     getTopTen() {
-      for (let i = 0; i < 9; i++) {
-        this.topTen.push(this.laughs[i]);
-      }
+      this.getListings().then(() => {
+        let iterable = this.laughs;
+        let array = Object.values(iterable);
+        this.topTen.push(array.slice(0, 10));
+        this.topTen = this.topTen[0];
+        return this.topTen;
+      });
     }
   }
 };
