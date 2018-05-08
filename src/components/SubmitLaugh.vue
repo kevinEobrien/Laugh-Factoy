@@ -15,7 +15,7 @@
 <script>
 export default {
   name: "SubmitLaugh",
-  props: ["apiURL", "laughs", "getListings"],
+  props: ["laughs", "getListings"],
   data() {
     return {
       submission: {
@@ -23,7 +23,8 @@ export default {
         description: "",
         laughlink: "",
         likes: 0
-      }
+      },
+      apiURL: "https://calm-plains-98236.herokuapp.com/"
     };
   },
   methods: {
@@ -32,11 +33,7 @@ export default {
         method: "POST",
         headers: new Headers({ "Content-Type": "application/json" }),
         body: JSON.stringify(this.submission)
-      })
-        .then(response => response.json())
-        .then(() => {
-          this.getListings();
-        });
+      }).then(response => response.json());
       this.submission.name = "";
       this.submission.description = "";
       this.submission.laughlink = "";
@@ -59,6 +56,13 @@ div {
 label {
   font-size: 2rem;
   font-family: Arial, Helvetica, sans-serif;
+  text-shadow: 2px 2px black;
+}
+#submit {
+  font-family: Tahoma, sans-serif;
+  font-size: 2rem;
+  height: 3rem;
+  border-radius: 10px;
 }
 </style>
 

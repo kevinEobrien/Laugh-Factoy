@@ -1,11 +1,13 @@
 <template>
   <div id='app'>
    <h1>Welcome to the Laugh Factory</h1>
-   <SubmitLaugh :getListings="getListings" :laughs='laughs' :apiURL="apiURL"/>
+   <Navbar/>
+   <router-view/>
+   <!-- <SubmitLaugh :getListings="getListings" :laughs='laughs' :apiURL="apiURL"/>
    <AddComment :commentsURL="commentsURL" :getComments="getComments" :comments="comments"/>
    <LaughList :getListings="getListings" :apiURL="apiURL" :laughs="laughs"/>
-   <LikeChart :sortByLikes="sortByLikes" :laughs="laughs" :getListings="getListings"/>
-   <Comments :commentsURL="commentsURL" :comments="comments"/>
+   <LikeChart :laughs="laughs" :getListings="getListings"/>
+   <Comments :commentsURL="commentsURL" :comments="comments"/> -->
  
   </div>
 </template>
@@ -16,6 +18,7 @@ import SubmitLaugh from "@/components/SubmitLaugh";
 import AddComment from "@/components/AddComment";
 import Comments from "@/components/Comments";
 import LikeChart from "@/components/LikeChart";
+import Navbar from "@/components/Navbar";
 
 export default {
   name: "App",
@@ -24,14 +27,13 @@ export default {
     SubmitLaugh,
     AddComment,
     Comments,
-    LikeChart
+    LikeChart,
+    Navbar
   },
   data() {
     return {
       apiURL: "https://calm-plains-98236.herokuapp.com/",
-      laughs: [],
-      commentsURL: "https://calm-plains-98236.herokuapp.com/comments",
-      comments: []
+      laughs: []
     };
   },
   methods: {
@@ -41,23 +43,10 @@ export default {
         .then(response => {
           this.laughs = response.laughs.sort();
         });
-    },
-    sortByLikes(completeArray) {
-      completeArray.sort((a, b) => {
-        return a.likes - b.likes;
-      });
-    },
-    getComments() {
-      return fetch(this.commentsURL)
-        .then(response => response.json())
-        .then(response => {
-          this.comments = response.comments;
-        });
     }
   },
   mounted() {
     this.getListings();
-    this.getComments();
   }
 };
 </script>
@@ -68,6 +57,8 @@ export default {
   margin: 0;
 }
 #app {
+  display: flex;
+  flex-flow: column;
   font-family: "Sedgwick Ave Display";
   font-size: 5rem;
   -webkit-font-smoothing: antialiased;
@@ -80,9 +71,13 @@ export default {
   margin-top: 60px;
   margin: 0;
   color: indianred;
+  text-shadow: 2px 2px black;
+  height: fit-content;
+  min-height: 100vh;
 }
 h1 {
   color: whitesmoke;
   text-shadow: 2px 2px black;
+  margin: 2rem;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-   <div id="app">
     <div class="container">
+      <button @click.prevent="makeNames">TEST</button>
       <div class="Chart__list">
         <div class="Chart">
           <h2>Most Liked Laughs</h2>
@@ -8,14 +8,13 @@
         </div>
       </div>
     </div>
-</div>
 </template>
 <script>
 import BarChart from "@/components/BarChart";
 
 export default {
   name: "LikeChart",
-  props: ["laughs", "getListings", "sortByLikes"],
+  props: ["topTen"],
   components: {
     BarChart
   },
@@ -23,33 +22,27 @@ export default {
     return {
       names: [],
       chartLikes: [],
-      topNames: []
+      apiURL: "https://calm-plains-98236.herokuapp.com/"
     };
   },
   methods: {
-    makeNames() {
-      this.getListings().then(() => {
-        for (let i = 0; i < this.laughs.length; i++) {
-          this.names.push(this.laughs[i].name);
-        }
-      });
+    getListings() {
+      return fetch(this.apiURL)
+        .then(response => response.json())
+        .then(response => {
+          this.laughs = response.laughs;
+        });
     },
-    getTops() {
-      topNames.push(names);
-    },
-    makeLikes() {
+    getTopTen() {
       this.getListings().then(() => {
-        for (let i = 0; i < this.laughs.length; i++) {
-          this.chartLikes.push(this.laughs[i].likes);
-        }
+        let iterable = this.laughs;
+        let array = Object.values(iterable);
+        this.topTen.push(array.slice(0, 10));
+        this.topTen = this.topTen[0];
+        return this.topTen;
       });
     }
-  },
-  mounted() {
-    this.makeNames();
-    this.makeLikes();
-  },
-  computed: {}
+  }
 };
 </script>
 <style scoped>
