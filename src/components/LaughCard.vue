@@ -12,7 +12,7 @@
 <script>
 export default {
   name: "LaughCard",
-  props: ["laugh", "apiURL", "getListings"],
+  props: ["laugh", "apiURL", "getListings", "topTen"],
   data() {
     return {
       submission: {
@@ -24,15 +24,12 @@ export default {
     deletelaugh() {
       fetch(this.apiURL + this.laugh.id, {
         method: "DELETE"
-      })
-        .then(console.log("It works....Sorta...", this.apiURL + this.laugh.id))
-        .then(() => this.getListings());
+      }).then(() => this.getListings());
     },
     likeIt() {
-      console.log(this.apiURL + this.laugh.id);
       fetch(this.apiURL + this.laugh.id, {
         method: "put",
-        headers: new Headers({ "Content-Type": "application/json" }),   
+        headers: new Headers({ "Content-Type": "application/json" }),
         body: JSON.stringify(this.submission)
       })
         .then(() => console.log("updated!!! "))

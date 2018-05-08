@@ -3,10 +3,10 @@ import { Bar } from 'vue-chartjs'
 export default {
   extends: Bar,
   props: { 
-    // topTen: {
-    //   type: Array,
-    //   required: true
-    // },
+    getListings: {
+      type: Function,
+      required: true
+    },
     names: {
       type: Array || Object,
       required: true
@@ -20,20 +20,42 @@ export default {
     return {
       options: {
         responsive: true
-      }
+      },
+      chartTen: []
     }
   },
   methods: {
+    getChartTen() {
+      this.getListings().then(() => {
+        console.log("TEST 1 million", this.names)
+        let iterable = this.laughs;
+        let array = Object.values(iterable);
+        this.chartTen.push(array.slice(0, 10));
+        this.chartTen = this.chartTen[0];
+        return this.chartTen;
+      });
+    },
+    makeNames() {
+      for (let i = 0; i < this.chartTen.length; i++) {
+        this.names.push(this.topTen[i].name);
+      }
+      console.log("names is now ", this.names);
+    },
+    makeLikes() {
+      for (let i = 0; i < this.chartTen.length; i++) {
+        this.chartLikes.push(this.chartTen[i].likes);
+      }
+      console.log("likes is now ", this.chartLikes);
+    },
     renderIt() {
+      this.getChartTen()  
       const array = this.names
-      const sortedNames = array.sort((a, b) => a.likes - b.likes);
       const nums = this.chartLikes
-      const sortedLikes = nums.sort((a, b) => a.likes - b.likes);
-      const labelsArray = Object.values(sortedNames)
-      const topTen = labelsArray.slice(0, 11)
-      const numArray = Object.values(sortedLikes)
+      console.log("chart render log says ", array, nums)
+      const labelsArray = Object.values(array)
+      const numArray = Object.values(nums)
       this.renderChart({
-        labels: topTen,
+        labels: labelsArray,
         scales: {
           xAxes: [{
             stacked: false,
