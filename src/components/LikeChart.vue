@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-      <button @click.prevent="makeNames">TEST</button>
       <div class="Chart__list">
         <div class="Chart">
           <h2>Most Liked Laughs</h2>
@@ -22,7 +21,8 @@ export default {
     return {
       names: [],
       chartLikes: [],
-      apiURL: "https://calm-plains-98236.herokuapp.com/"
+      apiURL: "https://calm-plains-98236.herokuapp.com/",
+      chartTen: []
     };
   },
   methods: {
@@ -33,15 +33,35 @@ export default {
           this.laughs = response.laughs;
         });
     },
-    getTopTen() {
+    getChartTen() {
       this.getListings().then(() => {
         let iterable = this.laughs;
         let array = Object.values(iterable);
-        this.topTen.push(array.slice(0, 10));
-        this.topTen = this.topTen[0];
-        return this.topTen;
+        this.chartTen.push(array.slice(0, 10));
+        this.chartTen = this.chartTen[0];
+        return this.chartTen;
       });
+    },
+    makeNames() {
+      for (let i = 0; i < this.chartTen.length; i++) {
+        this.names.push(this.chartTen[i].name);
+      }
+      return this.names;
+    },
+    makeLikes() {
+      for (let i = 0; i < this.chartTen.length; i++) {
+        this.chartLikes.push(this.chartTen[i].likes);
+      }
     }
+  },
+  watch: {
+    chartTen: function() {
+      this.makeNames();
+      this.makeLikes();
+    }
+  },
+  mounted() {
+    this.getChartTen();
   }
 };
 </script>
