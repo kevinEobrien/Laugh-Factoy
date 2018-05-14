@@ -3,7 +3,7 @@
       <ul>
         <LaughCard v-for="laugh in topTen" :key="laugh.id" :laugh="laugh" :apiURL="apiURL" :topTen="topTen"/>
       </ul>
-      <!-- <LikeChart :topTen="topTen"/> -->
+      <LikeChart :topTen="topTen"/>
   </div>
 </template>
 
