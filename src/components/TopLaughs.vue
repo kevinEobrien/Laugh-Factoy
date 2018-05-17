@@ -20,7 +20,7 @@ export default {
   },
   data() {
     return {
-      apiURL: "https://calm-plains-98236.herokuapp.com/",
+      apiURL: "https://vast-wildwood-21026.herokuapp.com/",
       laughs: [],
       topTen: []
     };
