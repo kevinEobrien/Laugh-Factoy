@@ -28,7 +28,7 @@ export default {
   methods: {
     submitComment() {
       console.log("checking to see if function is running");
-      fetch("https://calm-plains-98236.herokuapp.com/comments", {
+      fetch("https://vast-wildwood-21026.herokuapp.com/comments", {
         method: "POST",
         headers: new Headers({ "Content-Type": "application/json" }),
         body: JSON.stringify(this.comment)
