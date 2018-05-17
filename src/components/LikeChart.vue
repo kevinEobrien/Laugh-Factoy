@@ -21,7 +21,7 @@ export default {
     return {
       names: [],
       chartLikes: [],
-      apiURL: "https://calm-plains-98236.herokuapp.com/",
+      apiURL: "https://vast-wildwood-21026.herokuapp.com/",
       chartTen: []
     };
   },

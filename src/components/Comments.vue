@@ -19,7 +19,7 @@ export default {
   components: { AddComment },
   data() {
     return {
-      commentsURL: "https://calm-plains-98236.herokuapp.com/comments",
+      commentsURL: "https://vast-wildwood-21026.herokuapp.com/comments",
       comments: []
     };
   },

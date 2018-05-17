@@ -25,6 +25,7 @@ module.exports = {
   },
   // add your custom rules here
   rules: {
+    'no-return-assign': 0,
     'comma-dangle': 0,
     'semi': 0,
     'arrow-parens': 0,
@@ -35,7 +36,11 @@ module.exports = {
     'quotes': 0,
     'no-tabs': 0,
     'prefer-const': 0,
+    'no-alert': 0,
     'no-mixed-spaces-and-tabs': 0, 
+    'space-before-function-paren': 0,
+    'func-names': 0,
+    'object-shorthand': 0,
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {
       js: 'never',
