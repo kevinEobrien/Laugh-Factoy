@@ -6,9 +6,20 @@
       <input id=nameinput type="text" v-model="submission.name">
       <label for="description">Description</label>
       <input id=descriptionInput type="text" v-model="submission.description">
-      <label for="laughlink">Link to your laugh</label>
-      <input id=link type="text" v-model="submission.laughlink">
-      <input id="submit" type="submit" value="Submit">
+       <select @change="chooseMethod" name="method">
+          <option value="Record">Record Your Laugh</option>
+          <option value="ChooseFile">Choose Audio Laugh to Upload</option>
+          <option value="URL">Link to a laugh URL</option>
+      </select> 
+      <label v-show="url" for="laughlink">Link to your laugh</label>
+      <input v-show="url" id=link type="text" v-model="submission.laughlink">
+      <form v-show="findFile" id="uploadForm" @submit.prevent="uploadLaugh">
+        <h2>{{this.post}}</h2>
+        <label for="image">Add Your Laugh Here</label>
+        <input type="file" name="audio" id="audio">
+          <input  type="submit" name="submit" id="submit" value="Upload">
+      </form>
+      <input  id="submit" type="submit" value="Submit">
     </form>
   </div>
 </template>
@@ -18,13 +29,15 @@ export default {
   props: ["laughs", "getListings"],
   data() {
     return {
+      url: false,
+      findFile: false,
       submission: {
         name: "",
         description: "",
         laughlink: "",
         likes: 0
       },
-      apiURL: "https://calm-plains-98236.herokuapp.com/"
+      apiURL: "https://vast-wildwood-21026.herokuapp.com/"
     };
   },
   methods: {
@@ -38,6 +51,27 @@ export default {
       this.submission.description = "";
       this.submission.laughlink = "";
       this.submission.likes = 0;
+    },
+    uploadLaugh(event) {
+      console.log(event);
+      fetch("https://vast-wildwood-21026.herokuapp.com/upload", {
+        method: "POST",
+        body: new FormData(event.target),
+        "Content-type": "multipart/form-data"
+      })
+        .then(response => response.json())
+        .then(response => (this.submission.laughlink = response.audioUrl))
+        .then(() => alert("Laugh Uploaded. Be sure to submit it 😉"));
+    },
+    chooseMethod() {
+      let select = document.querySelector("select");
+      if (select.value === "URL") {
+        this.url = true;
+        this.findFile = false;
+      } else if (select.value === "ChooseFile") {
+        this.findFile = true;
+        this.url = false;
+      }
     }
   }
 };
