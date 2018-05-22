@@ -25,6 +25,7 @@
     </form>
     <button class="recordLight" @click="stopRecorder" v-show="recordButton">Stop Recording</button>
     <button @click="recordAudio" >Mic Test</button>
+    <audio controls></audio>
   </div>
 </template>
 <script>
@@ -73,33 +74,22 @@ export default {
         .then(response => (this.submission.laughlink = response.audioUrl))
         .then(() => alert("Laugh Uploaded. Don't forget to submit it 😉"));
     },
-    pushChunks() {
-      this.mediaRecorder.ondataavailable = function(event) {
-        this.audioChunks.push(event.data);
-        console.log(
-          "pushChunks makes it do this... OOOOhhhh...  ",
-          this.audioChunks
-        );
-      };
-    },
+    // pushChunks() {
+    //   console.log(
+    //     "pushChunks makes it do this... OOOOhhhh...  ",
+    //     this.audioChunks
+    //   );
+
+    //   };
+    // },
     stopRecorder() {
-      this.pushChunks();
-      console.log("before stop in stop function", this.mediaRecorder, this.);
+      console.log("before stop in stop function", this.mediaRecorder);
       this.mediaRecorder.stop();
       let recordLight = document.querySelector(".recordLight");
       recordLight.style.background = "";
       recordLight.style.color = "";
       this.mediaRecorder.onstop = function(event) {
         console.log("data available after MediaRecorder.stop() called.");
-        let clipName = prompt("Enter a name for your sound clip");
-        console.log("after stop", this.mediaRecorder);
-        console.log("hits this part of stop function");
-        this.audioBlob = new Blob(this.audioChunks, {
-          type: "audio/ogg; codecs=opus"
-        });
-        var audioURL = URL.createObjectURL(this.audioBlob);
-        console.log("If it spits out a link it shoul be here => ", audioURL);
-        // this.submission.laughlink = audioURL;
       };
     },
     recordAudio() {
@@ -118,7 +108,24 @@ export default {
           let recordLight = document.querySelector(".recordLight");
           recordLight.style.background = "red";
           recordLight.style.color = "black";
-          console.log("end of first button function", this.mediaRecorder);
+          this.mediaRecorder.ondataavailable = function(event) {
+            let audioChunks = [];
+            audioChunks.push(event.data);
+            console.log("after push", audioChunks);
+            let clipName = prompt("Enter a name for your sound clip");
+            this.audioBlob = new Blob(audioChunks, {
+              type: "audio/ogg; codecs=opus"
+            });
+            // this.uploadLaugh(this.audioBlob);
+            let newURL = URL.createObjectURL(this.audioBlob);
+            let audio = document.querySelector("audio");
+            audio.src = newURL;
+            console.log(
+              "If it spits out a link it shoul be here => ",
+              this.audioURL
+            );
+            // this.submission.laughlink = audioURL;
+          };
         });
     },
     chooseMethod() {
@@ -138,11 +145,6 @@ export default {
       }
     }
   }
-  // watch: {
-  //   mediaRecorder: function() {
-  //     this.pushChunks();
-  //   }
-  // }
 };
 </script>
 <style scoped>
