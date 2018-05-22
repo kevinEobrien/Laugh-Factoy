@@ -23,7 +23,7 @@
       </form>
       <input  id="submit" type="submit" value="Submit">
     </form>
-    <button @click="startStop" v-show="recordButton">Play Button</button>
+    <button class="recordLight" @click="stopRecorder" v-show="recordButton">Stop Recording</button>
     <button @click="recordAudio" >Mic Test</button>
   </div>
 </template>
@@ -43,7 +43,8 @@ export default {
         name: "",
         description: "",
         laughlink: "",
-        likes: 0
+        likes: 0,
+        mediaRecorder: ""
       },
       apiURL: "https://vast-wildwood-21026.herokuapp.com/"
     };
@@ -71,37 +72,47 @@ export default {
         .then(response => (this.submission.laughlink = response.audioUrl))
         .then(() => alert("Laugh Uploaded. Don't forget to submit it 😉"));
     },
-    startStop() {
-      this.record = !this.record;
-    },
-    useRecorder(stream) {
-      let mediaRecorder = new MediaRecorder(stream);
-      let start = () => mediaRecorder.start();
-      let stop = () => mediaRecorder.stop();
-      if ((record = true)) {
-        start();
-      } else if ((record = false)) {
-        stop();
-      }
-      mediaRecorder.onstop = function(event) {
-        console.log("data available after MediaRecorder.stop() called.");
-        mediaRecorder.ondataavailable = function(event) {
-          this.audioChunks.push(event.data);
+    stopRecorder() {
+      console.log("stop function runs ");
+      let mediaRecorder = mediaRecorder.stop().then(() => {
+        console.log("after then ", mediaRecorder.state);
+        this.mediaRecorder.onstop = function(event) {
+          console.log("data available after MediaRecorder.stop() called.");
+          let clipName = prompt("Enter a name for your sound clip");
+          recordLight.style.background = "red";
+          recordLight.style.color = "black";
+          this.mediaRecorder.ondataavailable = function(e) {
+            this.audioChunks.push(e.data);
+          };
+          let audioBlob = new Blob(this.audioChunks);
+          console.log("hits this part of stop function");
+          // this.uploadLaugh(audioBlob);
+          console.log(
+            "If it spits out a link it shoul be here => ",
+            this.submission.laughlink
+          );
         };
-        let audioBlob = new Blob(this.audioChunks);
-        this.uploadLaugh(audioBlob);
-        console.log(
-          "If it spit out a link it shoul be here => ",
-          this.submission.laughlink
-        );
-      };
+      });
     },
     recordAudio() {
+      if (navigator.mediaDevices) {
+        console.log("getUserMedia supported.");
+      }
       this.recordButton = true;
-      let stream = navigator.mediaDevices.getUserMedia({
-        audio: true
-      });
-      this.useRecorder(stream);
+      navigator.mediaDevices
+        .getUserMedia({
+          audio: true
+        })
+        .then(function(stream) {
+          let mediaRecorder = new MediaRecorder(stream);
+          console.log("before play ", mediaRecorder.state, mediaRecorder);
+          let recordLight = document.querySelector(".recordLight");
+          mediaRecorder.start();
+          recordLight.style.background = "red";
+          recordLight.style.color = "black";
+          console.log("after play ", mediaRecorder.state);
+        })
+        .then(() => {});
     },
     chooseMethod() {
       let select = document.querySelector("select");
