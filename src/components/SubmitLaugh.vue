@@ -33,6 +33,8 @@ export default {
   props: ["laughs", "getListings"],
   data() {
     return {
+      audioBlob: undefined,
+      mediaRecorder: {},
       audioChunks: [],
       recordButton: false,
       record: false,
@@ -43,8 +45,7 @@ export default {
         name: "",
         description: "",
         laughlink: "",
-        likes: 0,
-        mediaRecorder: ""
+        likes: 0
       },
       apiURL: "https://vast-wildwood-21026.herokuapp.com/"
     };
@@ -72,27 +73,34 @@ export default {
         .then(response => (this.submission.laughlink = response.audioUrl))
         .then(() => alert("Laugh Uploaded. Don't forget to submit it 😉"));
     },
+    pushChunks() {
+      this.mediaRecorder.ondataavailable = function(event) {
+        this.audioChunks.push(event.data);
+        console.log(
+          "pushChunks makes it do this... OOOOhhhh...  ",
+          this.audioChunks
+        );
+      };
+    },
     stopRecorder() {
-      console.log("stop function runs ");
-      let mediaRecorder = mediaRecorder.stop().then(() => {
-        console.log("after then ", mediaRecorder.state);
-        this.mediaRecorder.onstop = function(event) {
-          console.log("data available after MediaRecorder.stop() called.");
-          let clipName = prompt("Enter a name for your sound clip");
-          recordLight.style.background = "red";
-          recordLight.style.color = "black";
-          this.mediaRecorder.ondataavailable = function(e) {
-            this.audioChunks.push(e.data);
-          };
-          let audioBlob = new Blob(this.audioChunks);
-          console.log("hits this part of stop function");
-          // this.uploadLaugh(audioBlob);
-          console.log(
-            "If it spits out a link it shoul be here => ",
-            this.submission.laughlink
-          );
-        };
-      });
+      this.pushChunks();
+      console.log("before stop in stop function", this.mediaRecorder, this.);
+      this.mediaRecorder.stop();
+      let recordLight = document.querySelector(".recordLight");
+      recordLight.style.background = "";
+      recordLight.style.color = "";
+      this.mediaRecorder.onstop = function(event) {
+        console.log("data available after MediaRecorder.stop() called.");
+        let clipName = prompt("Enter a name for your sound clip");
+        console.log("after stop", this.mediaRecorder);
+        console.log("hits this part of stop function");
+        this.audioBlob = new Blob(this.audioChunks, {
+          type: "audio/ogg; codecs=opus"
+        });
+        var audioURL = URL.createObjectURL(this.audioBlob);
+        console.log("If it spits out a link it shoul be here => ", audioURL);
+        // this.submission.laughlink = audioURL;
+      };
     },
     recordAudio() {
       if (navigator.mediaDevices) {
@@ -101,18 +109,17 @@ export default {
       this.recordButton = true;
       navigator.mediaDevices
         .getUserMedia({
-          audio: true
+          audio: true,
+          video: false
         })
-        .then(function(stream) {
-          let mediaRecorder = new MediaRecorder(stream);
-          console.log("before play ", mediaRecorder.state, mediaRecorder);
+        .then(stream => {
+          this.mediaRecorder = new MediaRecorder(stream);
+          this.mediaRecorder.start();
           let recordLight = document.querySelector(".recordLight");
-          mediaRecorder.start();
           recordLight.style.background = "red";
           recordLight.style.color = "black";
-          console.log("after play ", mediaRecorder.state);
-        })
-        .then(() => {});
+          console.log("end of first button function", this.mediaRecorder);
+        });
     },
     chooseMethod() {
       let select = document.querySelector("select");
@@ -131,6 +138,11 @@ export default {
       }
     }
   }
+  // watch: {
+  //   mediaRecorder: function() {
+  //     this.pushChunks();
+  //   }
+  // }
 };
 </script>
 <style scoped>
