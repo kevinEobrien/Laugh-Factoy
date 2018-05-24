@@ -26,6 +26,8 @@
     <button class="recordLight" @click="stopRecorder" v-show="recordButton">Stop Recording</button>
     <button @click="recordAudio" >Mic Test</button>
     <audio controls></audio>
+    <input type="file" name="audio" id="audio">
+    <button @click="uploadR">Upload Recroding</button>
   </div>
 </template>
 <script>
@@ -34,6 +36,7 @@ export default {
   props: ["laughs", "getListings"],
   data() {
     return {
+      audioURL: "",
       audioBlob: undefined,
       mediaRecorder: {},
       audioChunks: [],
@@ -65,6 +68,7 @@ export default {
     },
     uploadLaugh(event) {
       console.log(event);
+
       fetch("https://vast-wildwood-21026.herokuapp.com/upload", {
         method: "POST",
         body: new FormData(event.target),
@@ -74,14 +78,19 @@ export default {
         .then(response => (this.submission.laughlink = response.audioUrl))
         .then(() => alert("Laugh Uploaded. Don't forget to submit it 😉"));
     },
-    // pushChunks() {
-    //   console.log(
-    //     "pushChunks makes it do this... OOOOhhhh...  ",
-    //     this.audioChunks
-    //   );
-
-    //   };
-    // },
+    uploadR() {
+      console.log("What's in Audio today? ", this.toForm);
+      let formData = new FormData();
+      formData.append();
+      fetch("https://vast-wildwood-21026.herokuapp.com/upload", {
+        method: "POST",
+        body: formData,
+        "Content-type": "multipart/form-data"
+      })
+        .then(response => response.json())
+        .then(response => (this.submission.laughlink = response.audioUrl))
+        .then(() => alert("Laugh Uploaded. Don't forget to submit it 😉"));
+    },
     stopRecorder() {
       console.log("before stop in stop function", this.mediaRecorder);
       this.mediaRecorder.stop();
@@ -114,16 +123,18 @@ export default {
             console.log("after push", audioChunks);
             let clipName = prompt("Enter a name for your sound clip");
             this.audioBlob = new Blob(audioChunks, {
-              type: "audio/ogg; codecs=opus"
+              type: "audio/wav; codecs=opus"
             });
+
             // this.uploadLaugh(this.audioBlob);
+            // this.uploadR(this.audioBlob);
             let newURL = URL.createObjectURL(this.audioBlob);
             let audio = document.querySelector("audio");
-            audio.src = newURL;
-            console.log(
-              "If it spits out a link it shoul be here => ",
-              this.audioURL
-            );
+            this.audioURL = newURL;
+            audio.src = this.audioURL;
+            console.log("If it spits out a link it shoul be here => ", newURL);
+            audioChunks = [];
+
             // this.submission.laughlink = audioURL;
           };
         });
