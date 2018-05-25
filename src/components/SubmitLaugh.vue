@@ -110,10 +110,19 @@ export default {
       fetch("https://vast-wildwood-21026.herokuapp.com/upload", {
         method: "POST",
         body: formData,
-        "Content-type": "multipart/form-data"
-      })
-        .then(response => response.json())
-        .then(response => (this.submission.laughlink = response.audioUrl))
+        headers: new Headers({ "Content-Type": "application/json" }),
+        body: JSON.stringify(this.submission)
+      }).then(response => response.json());
+      this.submission.name = "";
+      this.submission.description = "";
+      this.submission.laughlink = "";
+      this.submission.likes = 0;
+    },
+    uploadLaugh(event) {
+      console.log(event);
+      fetch("https://vast-wildwood-21026.herokuapp.com/upload", {
+        method: "POST",
+        body: new FormData(event.target),
         .then(() => alert("Laugh Uploaded. Don't forget to submit it 😉"));
     },
     stopRecorder() {
