@@ -88,7 +88,6 @@ export default {
         this.audioURL = "";
         console.log("gets to end of function");
         this.getListings();
-        this.$route.router.go("/laughlist");
       }
     },
     uploadLaugh(event) {
@@ -202,7 +201,7 @@ label {
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
-  appearance: none; /* remove default arrow */
+  appearance: none;
   background-image: url("https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-c-128.png")
     no-repeat right;
   font-size: 2rem;
