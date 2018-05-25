@@ -54,20 +54,28 @@ ul {
   justify-content: center;
   font-size: 2rem;
 <<<<<<< HEAD
+<<<<<<< HEAD
   padding: 0;
 =======
 >>>>>>> f6e9ee8458da665868cf9d9d1778d3e00663b8c0
+=======
+  padding: 0;
+>>>>>>> 4700f5741e48ff8d317e6b0361b0d5ed027a775a
 }
 li {
   font-family: "Lucida Sans", sans-serif;
   margin: 5px;
 <<<<<<< HEAD
+<<<<<<< HEAD
   width: 20rem;
   height: 15rem;
 =======
-  width: 25vw;
-  height: 40vh;
+
 >>>>>>> f6e9ee8458da665868cf9d9d1778d3e00663b8c0
+=======
+  width: 20rem;
+  height: 15rem;
+>>>>>>> 4700f5741e48ff8d317e6b0361b0d5ed027a775a
   border-radius: 20px;
   color: indianred;
   background-color: white;

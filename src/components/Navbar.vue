@@ -1,9 +1,13 @@
 <template>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <div class="nav">
 =======
     <div>
 >>>>>>> f6e9ee8458da665868cf9d9d1778d3e00663b8c0
+=======
+    <div class="nav">
+>>>>>>> 4700f5741e48ff8d317e6b0361b0d5ed027a775a
         <nav>
             <ul>
                 <li>
