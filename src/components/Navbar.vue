@@ -1,5 +1,9 @@
 <template>
+<<<<<<< HEAD
     <div class="nav">
+=======
+    <div>
+>>>>>>> f6e9ee8458da665868cf9d9d1778d3e00663b8c0
         <nav>
             <ul>
                 <li>

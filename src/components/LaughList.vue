@@ -1,7 +1,11 @@
 <template>
   <div>
     <ul>
+<<<<<<< HEAD
       <LaughCard v-for="laugh in laughs" :key="laugh.id" :laugh="laugh" :apiURL="apiURL" :getListings="getListings" />
+=======
+      <LaughCard v-for="laugh in laughs" :key="laugh.id" :laugh="laugh" :apiURL="apiURL"/>
+>>>>>>> f6e9ee8458da665868cf9d9d1778d3e00663b8c0
     </ul>
   </div>
 </template>

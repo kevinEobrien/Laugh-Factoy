@@ -88,7 +88,6 @@ export default {
         this.audioURL = "";
         console.log("gets to end of function");
         this.getListings();
-        this.$route.router.go("/laughlist");
       }
     },
     uploadLaugh(event) {

@@ -53,13 +53,21 @@ ul {
   flex-wrap: wrap;
   justify-content: center;
   font-size: 2rem;
+<<<<<<< HEAD
   padding: 0;
+=======
+>>>>>>> f6e9ee8458da665868cf9d9d1778d3e00663b8c0
 }
 li {
   font-family: "Lucida Sans", sans-serif;
   margin: 5px;
+<<<<<<< HEAD
   width: 20rem;
   height: 15rem;
+=======
+  width: 25vw;
+  height: 40vh;
+>>>>>>> f6e9ee8458da665868cf9d9d1778d3e00663b8c0
   border-radius: 20px;
   color: indianred;
   background-color: white;
