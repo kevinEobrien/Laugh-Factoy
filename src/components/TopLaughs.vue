@@ -57,8 +57,8 @@ ul {
 li {
   font-family: "Lucida Sans", sans-serif;
   margin: 5px;
-  width: 25vw;
-  height: 40vh;
+  width: 20rem;
+  height: 15rem;
   border-radius: 20px;
   color: indianred;
   background-color: white;

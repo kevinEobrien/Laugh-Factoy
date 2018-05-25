@@ -71,5 +71,10 @@ div {
   border-radius: 20px;
   margin: 5rem;
 }
+@media screen and (max-width: 800px) {
+  .container {
+    display: none;
+  }
+}
 </style>
 
