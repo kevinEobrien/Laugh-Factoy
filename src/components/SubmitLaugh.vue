@@ -8,9 +8,9 @@
       <input id=descriptionInput type="text" v-model="submission.description">
       <div class="custom-select">
         <select @change.prevent="chooseMethod" name="method">
-          <option value="Placeholder">Select a submission method</option>
+          <option value="Placeholder">Select submission method</option>
           <option value="Record">Record Your Laugh</option>
-          <option class="s-page-button" value="ChooseFile">Choose Audio Laugh to Upload</option>
+          <option class="s-page-button" value="ChooseFile">Choose Laugh to Upload</option>
           <option value="URL">Link to a laugh URL</option>
         </select>
       </div> 
@@ -203,8 +203,11 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none; /* remove default arrow */
-  background-image: url("https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-c-128.png")
-    no-repeat right;
+  background-image: url("https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-c-128.png");
+  background-size: 2rem;
+  background-repeat: no-repeat;
+  background-position: right;
+
   font-size: 2rem;
 }
 </style>
