@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <LaughCard v-for="laugh in laughs" :key="laugh.id" :laugh="laugh" :apiURL="apiURL"/>
+      <LaughCard v-for="laugh in laughs" :key="laugh.id" :laugh="laugh" :apiURL="apiURL" :getListings="getListings" />
     </ul>
   </div>
 </template>
@@ -41,12 +41,13 @@ ul {
   flex-wrap: wrap;
   justify-content: center;
   font-size: 2rem;
+  padding: 0;
 }
 li {
   font-family: "Lucida Sans", sans-serif;
   margin: 5px;
-  width: 25vw;
-  height: 40vh;
+  width: 20rem;
+  height: 15rem;
   border-radius: 20px;
   color: indianred;
   background-color: white;

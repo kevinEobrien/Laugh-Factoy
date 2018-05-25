@@ -80,4 +80,9 @@ h1 {
   text-shadow: 2px 2px black;
   margin: 2rem;
 }
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 3rem;
+  }
+}
 </style>

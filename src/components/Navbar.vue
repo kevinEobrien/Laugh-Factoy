@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="nav">
         <nav>
             <ul>
                 <li>
@@ -48,6 +48,17 @@ a {
 }
 a:visited {
   color: indianred;
+}
+@media screen and (max-width: 600px) {
+  li {
+    font-size: 2.5rem;
+    width: 10rem;
+  }
+  ul {
+    font-size: 2rem;
+    display: flex;
+    flex-flow: column;
+  }
 }
 </style>
 
