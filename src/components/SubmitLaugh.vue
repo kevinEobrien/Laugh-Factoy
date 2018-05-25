@@ -21,13 +21,12 @@
         <input type="file" name="audio" id="audio">
           <input  type="submit" name="submit" id="submit" value="Upload">
       </form>
+       <button class="recordLight" @click="stopRecorder" v-show="recordButton">Stop Recording</button>
+      <button v-show="mic" @click="recordAudio">Record</button>
+      <audio v-show="mic" controls></audio>
+      <button v-show="mic" @click="uploadR">Upload Recroding</button>
       <input  id="submit" type="submit" value="Submit">
     </form>
-    <button class="recordLight" @click="stopRecorder" v-show="recordButton">Stop Recording</button>
-    <button @click="recordAudio" >Mic Test</button>
-    <audio controls></audio>
-    <input type="file" name="audio" id="audio">
-    <button @click="uploadR">Upload Recroding</button>
   </div>
 </template>
 <script>
@@ -71,7 +70,7 @@ export default {
 
       fetch("https://vast-wildwood-21026.herokuapp.com/upload", {
         method: "POST",
-        body: new FormData(event.target),
+        body: new FormData(event.targ),
         "Content-type": "multipart/form-data"
       })
         .then(response => response.json())
@@ -79,9 +78,11 @@ export default {
         .then(() => alert("Laugh Uploaded. Don't forget to submit it 😉"));
     },
     uploadR() {
-      console.log("What's in Audio today? ", this.toForm);
+      let recorded = document.querySelector("audio");
+      let uploadable = recorded.src;
+      console.log("test laughlink", this.submission.laughlink);
       let formData = new FormData();
-      formData.append();
+      formData.append("audio", this.audioBlob);
       fetch("https://vast-wildwood-21026.herokuapp.com/upload", {
         method: "POST",
         body: formData,
@@ -92,12 +93,11 @@ export default {
         .then(() => alert("Laugh Uploaded. Don't forget to submit it 😉"));
     },
     stopRecorder() {
-      console.log("before stop in stop function", this.mediaRecorder);
       this.mediaRecorder.stop();
       let recordLight = document.querySelector(".recordLight");
       recordLight.style.background = "";
       recordLight.style.color = "";
-      this.mediaRecorder.onstop = function(event) {
+      this.mediaRecorder.onstop = event => {
         console.log("data available after MediaRecorder.stop() called.");
       };
     },
@@ -117,25 +117,19 @@ export default {
           let recordLight = document.querySelector(".recordLight");
           recordLight.style.background = "red";
           recordLight.style.color = "black";
-          this.mediaRecorder.ondataavailable = function(event) {
+          this.mediaRecorder.ondataavailable = event => {
             let audioChunks = [];
             audioChunks.push(event.data);
-            console.log("after push", audioChunks);
             let clipName = prompt("Enter a name for your sound clip");
             this.audioBlob = new Blob(audioChunks, {
               type: "audio/wav; codecs=opus"
             });
 
-            // this.uploadLaugh(this.audioBlob);
-            // this.uploadR(this.audioBlob);
             let newURL = URL.createObjectURL(this.audioBlob);
             let audio = document.querySelector("audio");
             this.audioURL = newURL;
             audio.src = this.audioURL;
-            console.log("If it spits out a link it shoul be here => ", newURL);
             audioChunks = [];
-
-            // this.submission.laughlink = audioURL;
           };
         });
     },
