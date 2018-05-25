@@ -8,7 +8,7 @@
       <input id=descriptionInput type="text" v-model="submission.description">
       <div class="custom-select">
         <select @change.prevent="chooseMethod" name="method">
-          <option value="Placeholder">Select a submission method</option>
+          <option value="Placeholder">Select submission method</option>
           <option value="Record">Record Your Laugh</option>
           <option class="s-page-button" value="ChooseFile">Choose Audio Laugh to Upload</option>
           <option value="URL">Link to a laugh URL</option>
@@ -22,7 +22,7 @@
         <input type="file" name="audio" id="audio">
           <input  class="s-page-button" type="submit" name="submit" id="submit" value="Upload">
       </form>
-      <img v-show="mic" src="https://media.giphy.com/media/qRhgtheyqGnPW/giphy.gif" width="480" height="361" frameBorder="0">
+      <img id="cat" v-show="mic" src="https://media.giphy.com/media/qRhgtheyqGnPW/giphy.gif" width="480" height="361" frameBorder="0">
       <br>
        <button class="s-page-button" id="recordLight" @click="stopRecorder" v-show="recordButton">Stop Recording</button>
       <button class="s-page-button" v-show="mic" @click.prevent="recordAudio">Record</button>
@@ -202,9 +202,27 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-image: url("https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-c-128.png")
-    no-repeat right;
+  /* background-image: url("https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-c-128.png")
+    no-repeat right; */
   font-size: 2rem;
+}
+@media screen and (max-width: 600px) {
+  h2 {
+    font-size: 2rem;
+  }
+  select {
+    font-size: 0.75rem;
+    width: 20rem;
+  }
+  .custom-select {
+    margin: 0;
+  }
+  #cat {
+    width: 15rem;
+  }
+  #recordLight {
+    height: 8rem;
+  }
 }
 </style>
 
