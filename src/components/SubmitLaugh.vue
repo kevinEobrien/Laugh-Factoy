@@ -19,7 +19,7 @@
         <input type="file" name="audio" id="audio">
           <input  type="submit" name="submit" id="submit" value="Upload">
       </form>
-      <input  id="submit" type="submit" value="Submit">
+      <input  class="s-page-button" id="submit" type="submit" value="Submit">
     </form>
   </div>
 </template>
@@ -77,10 +77,6 @@ export default {
 };
 </script>
 <style scoped>
-.submit-card {
-  background-color: white;
-  border-radius: 20px;
-}
 div {
   margin: 3rem 5rem 1rem 5rem;
   border: 4px;
@@ -92,11 +88,19 @@ label {
   font-family: Arial, Helvetica, sans-serif;
   text-shadow: 2px 2px black;
 }
-#submit {
+.s-page-button {
   font-family: Tahoma, sans-serif;
   font-size: 2rem;
   height: 3rem;
   border-radius: 10px;
+}
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; /* remove default arrow */
+  background-image: url("https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-c-128.png")
+    no-repeat right;
+  font-size: 2rem;
 }
 </style>
 
