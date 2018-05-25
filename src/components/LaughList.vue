@@ -59,5 +59,10 @@ li h3 {
 li p {
   margin: 0;
 }
+@media screen and (max-width: 800px) {
+  ul {
+    padding: 0;
+  }
+}
 </style>
 
