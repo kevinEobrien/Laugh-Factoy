@@ -16,19 +16,11 @@ export default {
   mounted() {
     this.getListings();
   },
-  created() {
-    this.getListings();
-  },
   data() {
     return {
       apiURL: "https://vast-wildwood-21026.herokuapp.com/",
       laughs: ""
     };
-  },
-  computed: {
-    laughs: function() {
-      this.getListings;
-    }
   },
   methods: {
     getListings() {

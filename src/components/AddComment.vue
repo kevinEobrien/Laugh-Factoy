@@ -87,5 +87,10 @@ textarea#commentinput {
   font-size: 2rem;
   height: 3rem;
 }
+@media screen and (max-width: 800px) {
+  textarea#commentinput {
+    width: 20rem;
+  }
+}
 </style>
 

@@ -56,13 +56,19 @@ p {
 }
 ul {
   list-style: none;
+  padding: 0;
 }
 li {
-  padding: 0rem 0rem 1rem 0rem;
+  padding: 0rem 0rem 2rem 0rem;
   font-size: 1rem;
   font-family: Arial, Helvetica, sans-serif;
   display: flex;
   flex-flow: column nowrap;
   align-items: flex-start;
+}
+@media screen and (max-width: 800px) {
+  .comments {
+    width: 20rem;
+  }
 }
 </style>
