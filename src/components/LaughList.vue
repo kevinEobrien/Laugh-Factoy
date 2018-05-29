@@ -1,7 +1,7 @@
 <template>
   <div>
-    <ul>
-      <LaughCard v-for="laugh in laughs" :key="laugh.id" :laugh="laugh" :apiURL="apiURL"/>
+    <ul id="l-list">
+      <LaughCard v-for="laugh in laughs" :key="laugh.id" :laugh="laugh" :apiURL="apiURL" :getListings="getListings"/>
     </ul>
   </div>
 </template>
@@ -16,11 +16,19 @@ export default {
   mounted() {
     this.getListings();
   },
+  created() {
+    this.getListings();
+  },
   data() {
     return {
       apiURL: "https://vast-wildwood-21026.herokuapp.com/",
       laughs: ""
     };
+  },
+  computed: {
+    laughs: function() {
+      this.getListings;
+    }
   },
   methods: {
     getListings() {
@@ -34,6 +42,9 @@ export default {
 };
 </script>
 <style scoped>
+#l-list {
+  padding: 0;
+}
 ul {
   list-style: none;
   display: flex;
@@ -41,12 +52,13 @@ ul {
   flex-wrap: wrap;
   justify-content: center;
   font-size: 2rem;
+  padding: 0;
 }
 li {
   font-family: "Lucida Sans", sans-serif;
   margin: 5px;
   width: 20rem;
-  height: 15rem;
+  height: 16rem;
   border-radius: 20px;
   color: indianred;
   background-color: white;

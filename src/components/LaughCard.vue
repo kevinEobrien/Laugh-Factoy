@@ -16,7 +16,8 @@ export default {
   data() {
     return {
       submission: {
-        likes: 0
+        likes: 0,
+        laughs: []
       }
     };
   },
@@ -33,17 +34,10 @@ export default {
         body: JSON.stringify(this.submission)
       })
         .then(() => console.log("updated!!! "))
-        .then(() => this.getListings());
+        .then(() => {
+          this.getListings();
+        });
     }
-    // checkStatus(response) {
-    //   if (response.status >= 200 && response.status < 300) {
-    //     return response
-    //   } else {
-    //     const error = new Error(response.statusText)
-    //     error.response = response
-    //     throw error
-    //   }
-    // }
   }
 };
 </script>

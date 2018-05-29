@@ -1,6 +1,6 @@
 <template>
   <div class="submit-card">
-      <h2>Submit a laugh</h2>
+    <h2>Submit a laugh</h2>
     <form id="form-input" >
       <label for="name">Name</label>
       <input id=nameinput type="text" v-model="submission.name">
@@ -24,10 +24,10 @@
       </form>
       <img id="cat" v-show="mic" src="https://media.giphy.com/media/qRhgtheyqGnPW/giphy.gif" width="480" height="361" frameBorder="0">
       <br>
-       <button class="s-page-button" id="recordLight" @click="stopRecorder" v-show="recordButton">Stop Recording</button>
+       <button class="s-page-button" id="recordLight" @click.prevent="stopRecorder" v-show="recordButton">Stop Recording</button>
       <button class="s-page-button" v-show="mic" @click.prevent="recordAudio">Record</button>
       <audio v-show="mic" controls></audio>
-      <button class="s-page-button" v-show="readyForUpload" @click="uploadR">Upload Recording</button>
+      <button class="s-page-button" v-show="readyForUpload" @click.prevent="uploadR">Upload Recording</button>
       <input  @click.prevent="submitLaugh" class="s-page-button" type="submit" value="Submit">
     </form>
   </div>

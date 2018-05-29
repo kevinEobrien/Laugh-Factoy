@@ -53,6 +53,7 @@ ul {
   flex-wrap: wrap;
   justify-content: center;
   font-size: 2rem;
+  padding: 0;
 }
 li {
   font-family: "Lucida Sans", sans-serif;
