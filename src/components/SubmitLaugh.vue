@@ -32,6 +32,7 @@
     </form>
   </div>
 </template>
+
 <script>
 export default {
   name: "SubmitLaugh",
@@ -91,7 +92,6 @@ export default {
       }
     },
     uploadLaugh(event) {
-      console.log("no R");
       event.stopPropagation();
       fetch("https://vast-wildwood-21026.herokuapp.com/upload", {
         method: "POST",
@@ -128,35 +128,24 @@ export default {
       };
     },
     recordAudio() {
-      if (navigator.mediaDevices) {
-        console.log("getUserMedia supported.");
-      }
+      this.mediaRecorder.start();
       this.recordButton = true;
-      navigator.mediaDevices
-        .getUserMedia({
-          audio: true,
-          video: false
-        })
-        .then(stream => {
-          this.mediaRecorder = new MediaRecorder(stream);
-          this.mediaRecorder.start();
-          let recordLight = document.querySelector("#recordLight");
-          recordLight.style.background = "red";
-          recordLight.style.color = "black";
-          this.mediaRecorder.ondataavailable = event => {
-            let audioChunks = [];
-            audioChunks.push(event.data);
-            this.audioBlob = new Blob(audioChunks, {
-              type: "audio/wav; codecs=opus"
-            });
-
-            let newURL = URL.createObjectURL(this.audioBlob);
-            let audio = document.querySelector("audio");
-            this.audioURL = newURL;
-            audio.src = this.audioURL;
-            audioChunks = [];
-          };
+      let recordLight = document.querySelector("#recordLight");
+      recordLight.style.background = "red";
+      recordLight.style.color = "black";
+      this.mediaRecorder.ondataavailable = event => {
+        let audioChunks = [];
+        audioChunks.push(event.data);
+        this.audioBlob = new Blob(audioChunks, {
+          type: "audio/wav; codecs=opus"
         });
+
+        let newURL = URL.createObjectURL(this.audioBlob);
+        let audio = document.querySelector("audio");
+        this.audioURL = newURL;
+        audio.src = this.audioURL;
+        audioChunks = [];
+      };
     },
     chooseMethod() {
       let select = document.querySelector("select");
@@ -174,6 +163,17 @@ export default {
         this.mic = true;
         this.findFile = false;
         this.url = false;
+        if (navigator.mediaDevices) {
+          console.log("getUserMedia supported.");
+        }
+        navigator.mediaDevices
+          .getUserMedia({
+            audio: true,
+            video: false
+          })
+          .then(stream => {
+            this.mediaRecorder = new MediaRecorder(stream);
+          });
       }
     }
   }
@@ -181,6 +181,9 @@ export default {
 </script>
 
 <style scoped>
+.custom-select {
+  margin: 0;
+}
 div {
   margin: 3rem 5rem 1rem 5rem;
   border: 4px;
@@ -213,6 +216,12 @@ select {
   select {
     font-size: 0.75rem;
     width: 20rem;
+    font-family: "Arial, Helvetica, sans-serif";
+    font-weight: bold;
+  }
+  .submit-card {
+    width: 20rem;
+    margin: 0;
   }
   .custom-select {
     margin: 0;
