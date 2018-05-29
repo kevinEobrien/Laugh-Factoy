@@ -128,24 +128,34 @@ export default {
       };
     },
     recordAudio() {
-      this.mediaRecorder.start();
+      if (navigator.mediaDevices) {
+        console.log("getUserMedia supported.");
+      }
       this.recordButton = true;
-      let recordLight = document.querySelector("#recordLight");
-      recordLight.style.background = "red";
-      recordLight.style.color = "black";
-      this.mediaRecorder.ondataavailable = event => {
-        let audioChunks = [];
-        audioChunks.push(event.data);
-        this.audioBlob = new Blob(audioChunks, {
-          type: "audio/wav; codecs=opus"
+      navigator.mediaDevices
+        .getUserMedia({
+          audio: true,
+          video: false
+        })
+        .then(stream => {
+          this.mediaRecorder = new MediaRecorder(stream);
+          this.mediaRecorder.start();
+          let recordLight = document.querySelector("#recordLight");
+          recordLight.style.background = "red";
+          recordLight.style.color = "black";
+          this.mediaRecorder.ondataavailable = event => {
+            let audioChunks = [];
+            audioChunks.push(event.data);
+            this.audioBlob = new Blob(audioChunks, {
+              type: "audio/wav; codecs=opus"
+            });
+            let newURL = URL.createObjectURL(this.audioBlob);
+            let audio = document.querySelector("audio");
+            this.audioURL = newURL;
+            audio.src = this.audioURL;
+            audioChunks = [];
+          };
         });
-
-        let newURL = URL.createObjectURL(this.audioBlob);
-        let audio = document.querySelector("audio");
-        this.audioURL = newURL;
-        audio.src = this.audioURL;
-        audioChunks = [];
-      };
     },
     chooseMethod() {
       let select = document.querySelector("select");
@@ -154,26 +164,17 @@ export default {
         this.findFile = false;
         this.mic = false;
         this.readyForUpload = false;
+        this.recordButton = false;
       } else if (select.value === "ChooseFile") {
         this.findFile = true;
         this.url = false;
         this.mic = false;
         this.readyForUpload = false;
+        this.recordButton = false;
       } else if (select.value === "Record") {
         this.mic = true;
         this.findFile = false;
         this.url = false;
-        if (navigator.mediaDevices) {
-          console.log("getUserMedia supported.");
-        }
-        navigator.mediaDevices
-          .getUserMedia({
-            audio: true,
-            video: false
-          })
-          .then(stream => {
-            this.mediaRecorder = new MediaRecorder(stream);
-          });
       }
     }
   }
@@ -227,7 +228,7 @@ select {
     margin: 0;
   }
   #cat {
-    width: 15rem;
+    width: 14rem;
   }
   #recordLight {
     height: 8rem;

@@ -60,6 +60,7 @@ export default {
   display: flex;
   flex-flow: column;
   font-family: "Sedgwick Ave Display";
+  align-items: center;
   font-size: 5rem;
   -webkit-font-smoothing: antialiased;
   background-image: url("../static/HAHA.png");
