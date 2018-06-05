@@ -2,6 +2,8 @@
 
 This feel-good app is all about sharing laughter.  Post your laugh, comment, look at laugh popularity, or just sit back and laugh yourself while you listen to laughs others have contributed.
 
+[Visit the site] (https://kevinslaughfactory.firebaseapp.com/)
+
 ![]( https://s3.amazonaws.com/the-laugh-factory/laughFactoryScreenShot.png)
 
 
