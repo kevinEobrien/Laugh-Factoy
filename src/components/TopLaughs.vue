@@ -1,7 +1,7 @@
 <template>
   <div>
       <ul>
-        <LaughCard v-for="laugh in topTen" :key="laugh.id" :laugh="laugh" :apiURL="apiURL" :topTen="topTen"/>
+        <LaughCard v-for="laugh in topTen" :key="laugh.id" :laugh="laugh" :apiURL="apiURL" :topTen="topTen" :getListings="getListings"/>
       </ul>
       <LikeChart :topTen="topTen"/>
   </div>
