@@ -5,7 +5,7 @@
         <audio :src='laugh.laughlink' controls>BAM</audio>
         <p>Likes: {{laugh.likes}}</p>
         <button v-on:click='likeIt'>Like</button>
-        <button v-on:click='deletelaugh'>Delete</button>
+        <!-- <button v-on:click='deletelaugh'>Delete</button> -->
     </li>
 </template>
 

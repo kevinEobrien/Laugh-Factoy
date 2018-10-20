@@ -15,8 +15,8 @@ export default {
   name: "TopLaughs",
   components: { LikeChart, LaughCard },
   mounted() {
-    this.getListings();
     this.getTopTen();
+    this.getListings();
   },
   data() {
     return {
